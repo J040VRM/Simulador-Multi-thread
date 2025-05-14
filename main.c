@@ -186,6 +186,47 @@ int traduzir_endereco(Simulador *sim, int pid, int endereco_virtual) {
     return endereco_fisico;
 }
 
+int carregar_pagina(Simulador *sim, int pid, int num_pagina) {
+    int frame = encontrar_frame_livre(&sim->memoria);
+    if (frame == -1) {
+        // Substituição: decide algoritmo
+        frame = (sim->algoritmo == FIFO)
+                    ? substituir_pagina_fifo(sim)
+                    : substituir_pagina_random(sim);
+
+        // Libera página antiga
+        FrameInfo antigo = sim->memoria.frames[frame];
+        int indice_antigo = buscar_indice_processo(sim, antigo.pid);
+        if (indice_antigo != -1) {
+            sim->processos[indice_antigo].tabela_paginas[antigo.pagina].presente = 0;
+        }
+    }
+
+    // Localiza o processo atual
+    int indice_proc = buscar_indice_processo(sim, pid);
+    if (indice_proc == -1) {
+        fprintf(stderr, "Erro ao carregar: processo %d não encontrado.\n", pid);
+        return -1;
+    }
+
+    // Atualiza frame com nova página
+    sim->memoria.frames[frame].pid = pid;
+    sim->memoria.frames[frame].pagina = num_pagina;
+    sim->memoria.frames[frame].tempo_carga = sim->tempo_atual;
+    sim->memoria.frames[frame].ultimo_acesso = sim->tempo_atual;
+    sim->memoria.frames[frame].referenciada = 1;
+
+    // Atualiza tabela de páginas
+    Pagina *pag = &sim->processos[indice_proc].tabela_paginas[num_pagina];
+    pag->presente = 1;
+    pag->frame = frame;
+    pag->tempo_carga = sim->tempo_atual;
+    pag->ultimo_acesso = sim->tempo_atual;
+    pag->referenciada = 1;
+
+    return frame;
+}
+
 
 // Função principal de teste
 int main() {
