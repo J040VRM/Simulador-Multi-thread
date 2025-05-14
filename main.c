@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 // Constantes do simulador
 const int TAMANHO_PAGINA = 4096;      // 4 KB
@@ -185,6 +186,39 @@ int traduzir_endereco(Simulador *sim, int pid, int endereco_virtual) {
 
     return endereco_fisico;
 }
+//Funcoes auxiliares
+
+int encontrar_frame_livre(MemoriaFisica *mem) {
+    for (int i = 0; i < mem->num_frames; i++) {
+        if (mem->frames[i].pid == -1) {
+            return i;
+        }
+    }
+    return -1; // Nenhum frame livre
+}
+
+int substituir_pagina_fifo(Simulador *sim) {
+    int mais_antigo = 0;
+    for (int i = 1; i < sim->memoria.num_frames; i++) {
+        if (sim->memoria.frames[i].tempo_carga < sim->memoria.frames[mais_antigo].tempo_carga) {
+            mais_antigo = i;
+        }
+    }
+    return mais_antigo;
+}
+
+int substituir_pagina_random(Simulador *sim) {
+    return rand() % sim->memoria.num_frames;
+}
+
+void liberar_frame(MemoriaFisica *mem, int frame) {
+    mem->frames[frame].pid = -1;
+    mem->frames[frame].pagina = -1;
+    mem->frames[frame].tempo_carga = -1;
+    mem->frames[frame].ultimo_acesso = -1;
+    mem->frames[frame].referenciada = 0;
+}
+
 
 int carregar_pagina(Simulador *sim, int pid, int num_pagina) {
     int frame = encontrar_frame_livre(&sim->memoria);
