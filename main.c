@@ -135,6 +135,58 @@ void adicionar_processo(Simulador *sim, int pid, int tamanho) {
     sim->num_processos++;
 }
 
+// Função auxiliar para buscar o índice do processo no vetor
+int buscar_indice_processo(Simulador *sim, int pid) {
+    for (int i = 0; i < sim->num_processos; i++) {
+        if (sim->processos[i].pid == pid) {
+            return i;
+        }
+    }
+    return -1; // não encontrado
+}
+
+// Tradução de endereço virtual para físico com tratamento de page fault
+int traduzir_endereco(Simulador *sim, int pid, int endereco_virtual) {
+    int indice_proc = buscar_indice_processo(sim, pid);
+    if (indice_proc == -1) {
+        fprintf(stderr, "Erro: processo %d não encontrado!\n", pid);
+        return -1;
+    }
+
+    Processo *proc = &sim->processos[indice_proc];
+    int pagina = endereco_virtual / sim->tamanho_pagina;
+    int deslocamento = endereco_virtual % sim->tamanho_pagina;
+
+    if (pagina >= proc->num_paginas) {
+        fprintf(stderr, "Erro: página %d fora do limite do processo %d.\n", pagina, pid);
+        return -1;
+    }
+
+    Pagina *pag = &proc->tabela_paginas[pagina];
+
+    if (!pag->presente) {
+        printf("Tempo t=%d: [PAGE FAULT] Página %d do Processo %d não está na memória!\n",
+               sim->tempo_atual, pagina, pid);
+        sim->page_faults++;
+
+        int frame = carregar_pagina(sim, pid, pagina); // <- aqui deve retornar o frame
+        pag->frame = frame; // segurança caso carregar_pagina não atualize
+        pag->presente = 1;
+        pag->tempo_carga = sim->tempo_atual;
+    }
+
+    // Atualiza estatísticas e tempo de acesso
+    pag->ultimo_acesso = sim->tempo_atual;
+    sim->total_acessos++;
+
+    int endereco_fisico = pag->frame * sim->tamanho_pagina + deslocamento;
+    printf("Tempo t=%d: Endereço Virtual (P%d): %d -> Página: %d -> Frame: %d -> Endereço Físico: %d\n",
+           sim->tempo_atual, pid, endereco_virtual, pagina, pag->frame, endereco_fisico);
+
+    return endereco_fisico;
+}
+
+
 // Função principal de teste
 int main() {
     Simulador *sim = inicializar_simulador(TAMANHO_PAGINA, TAMANHO_MEMORIA);
