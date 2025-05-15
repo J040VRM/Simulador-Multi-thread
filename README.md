@@ -1,6 +1,6 @@
 <div align="center">
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:355C7D,100:6C5B7B&height=200&section=header&text=Simulador-Multi-thread&fontSize=50&fontColor=fff&animation=twinkling&fontAlignY=40">
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:FF0000,100:6C5B7B&height=200&section=header&text=Simulador-Multi-thread&fontSize=50&fontColor=fff&animation=twinkling&fontAlignY=40">
 
 <p align="center">
   <i>🚀 Simulador de Paginação de Memória Virtual que implementa algoritmos de substituição como FIFO, LRU e RANDOM, com tradução de endereços, gerenciamento de processos e estatísticas de desempenho.
@@ -54,12 +54,33 @@
 ### 👤 Authors | Autores
 
 <div align="center">
-  <a href="https://github.com/J040VRM" target="_blank">
-    <img src="https://skillicons.dev/icons?i=github" alt="GitHub"/>
-  </a>
-  <a href="https://www.linkedin.com/in/jo%C3%A3o-vitor-rocha-miranda-62b169264/" target="_blank">
-    <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"/>
-  </a>
-</div>
+
+<p>
+  <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
+  <a href="https://www.linkedin.com/in/alexandre-eiji-tomimura-carvalho-138212288/" target="_blank">Alexandre Eiji Tomimura Carvalho
+</a>
+</p>
+
+<p>
+  <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
+  <a href="https://www.linkedin.com/in/jo%C3%A3o-vitor-rocha-miranda-/" target="_blank">João Vitor Rocha Miranda
+</a>
+</p>
+
+<p>
+  <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
+  <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-pioltini-de-oliveira-7422a625b/" target="_blank">João Pedro Pioltini de Oliveira</a>
+</p>
+
+<p>
+  <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
+  <a href="https://www.linkedin.com/in/luiz-eduardo-bacha-4078452b8/" target="_blank">Luiz Eduardo Bacha</a>
+</p>
+
+<p>
+  <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
+  <a href="https://www.linkedin.com/in/matheus-veiga-bacetic-joaquim-a6552723a/" target="_blank">Matheus Veiga Bacetic Joaquim</a>
+</p>
 
 </div>
+
