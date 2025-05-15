@@ -1,3 +1,5 @@
+// https://chatgpt.com/share/682665b4-21b8-8003-b675-309ed7b4a1eb
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
