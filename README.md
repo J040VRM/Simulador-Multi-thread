@@ -66,19 +66,20 @@
   </tr>
   <tr>
     <td align="center">
-      <a href="https://www.linkedin.com/in/jo%C3%A3o-vitor-rocha-miranda-/" target="_blank">
-        <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
-      </a>
-    </td>
-    <td>João Vitor Rocha Miranda</td>
-  </tr>
-  <tr>
-    <td align="center">
       <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-pioltini-de-oliveira-7422a625b/" target="_blank">
         <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
       </a>
     </td>
     <td>João Pedro Pioltini de Oliveira</td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/jo%C3%A3o-vitor-rocha-miranda-/" target="_blank">
+        <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
+      </a>
+    </td>
+    <td>João Vitor Rocha Miranda
+</td>
   </tr>
   <tr>
     <td align="center">
