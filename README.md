@@ -55,32 +55,50 @@
 
 <div align="center">
 
-<p>
-  <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
-  <a href="https://www.linkedin.com/in/alexandre-eiji-tomimura-carvalho-138212288/" target="_blank">Alexandre Eiji Tomimura Carvalho
-</a>
-</p>
-
-<p>
-  <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
-  <a href="https://www.linkedin.com/in/jo%C3%A3o-vitor-rocha-miranda-/" target="_blank">João Vitor Rocha Miranda
-</a>
-</p>
-
-<p>
-  <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
-  <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-pioltini-de-oliveira-7422a625b/" target="_blank">João Pedro Pioltini de Oliveira</a>
-</p>
-
-<p>
-  <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
-  <a href="https://www.linkedin.com/in/luiz-eduardo-bacha-4078452b8/" target="_blank">Luiz Eduardo Bacha</a>
-</p>
-
-<p>
-  <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
-  <a href="https://www.linkedin.com/in/matheus-veiga-bacetic-joaquim-a6552723a/" target="_blank">Matheus Veiga Bacetic Joaquim</a>
-</p>
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/alexandre-eiji-tomimura-carvalho-138212288/" target="_blank">
+        <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
+      </a>
+    </td>
+    <td>Alexandre Eiji Tomimura Carvalho</td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/jo%C3%A3o-vitor-rocha-miranda-/" target="_blank">
+        <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
+      </a>
+    </td>
+    <td>João Vitor Rocha Miranda</td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-pioltini-de-oliveira-7422a625b/" target="_blank">
+        <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
+      </a>
+    </td>
+    <td>João Pedro Pioltini de Oliveira</td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/luiz-eduardo-bacha-4078452b8/" target="_blank">
+        <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
+      </a>
+    </td>
+    <td>Luiz Eduardo Bacha</td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/matheus-veiga-bacetic-joaquim-a6552723a/" target="_blank">
+        <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="20"/>
+      </a>
+    </td>
+    <td>Matheus Veiga Bacetic Joaquim</td>
+  </tr>
+</table>
 
 </div>
+
+
 
