@@ -69,6 +69,8 @@ int carregar_pagina(Simulador *sim, int pid, int num_pagina);
 void executar_simulacao(Simulador *sim, int acessos[][2], int n);
 void exibir_memoria_fisica(Simulador *sim);
 void exibir_estatisticas(Simulador *sim);
+int substituir_pagina_lru(Simulador *sim);
+
 
 // ================== FUNÇÕES ==================
 
@@ -198,10 +200,20 @@ void liberar_frame(MemoriaFisica *mem, int frame) {
 int carregar_pagina(Simulador *sim, int pid, int num_pagina) {
     int frame = encontrar_frame_livre(&sim->memoria);
     if (frame == -1) {
-        frame = (sim->algoritmo == FIFO)
-                    ? substituir_pagina_fifo(sim)
-                    : substituir_pagina_random(sim);
-
+       switch (sim->algoritmo) {
+        case FIFO:
+            frame = substituir_pagina_fifo(sim);
+            break;
+        case RANDOM:
+            frame = substituir_pagina_random(sim);
+            break;
+        case LRU:
+            frame = substituir_pagina_lru(sim);
+            break;
+        default:
+            fprintf(stderr, "Algoritmo desconhecido!\n");
+            exit(1);
+    }
         FrameInfo antigo = sim->memoria.frames[frame];
         int indice_antigo = buscar_indice_processo(sim, antigo.pid);
         if (indice_antigo != -1)
@@ -255,6 +267,19 @@ void exibir_memoria_fisica(Simulador *sim) {
     printf("\n");
 }
 
+int substituir_pagina_lru(Simulador *sim) {
+    int menos_recente = -1;
+    for (int i = 0; i < sim->memoria.num_frames; i++) {
+        if (sim->memoria.frames[i].pid == -1) continue; // ignora frames livres
+
+        if (menos_recente == -1 || sim->memoria.frames[i].ultimo_acesso < sim->memoria.frames[menos_recente].ultimo_acesso) {
+            menos_recente = i;
+        }
+    }
+    return menos_recente;
+}
+
+
 void exibir_estatisticas(Simulador *sim) {
     printf("======== ESTATÍSTICAS ========\n");
     printf("Total de acessos: %d\n", sim->total_acessos);
@@ -265,20 +290,58 @@ void exibir_estatisticas(Simulador *sim) {
 int main() {
     srand(time(NULL));
     Simulador *sim = inicializar_simulador(TAMANHO_PAGINA, TAMANHO_MEMORIA);
-    sim->algoritmo = FIFO;
 
-    adicionar_processo(sim, 0, 16384);
-    adicionar_processo(sim, 1, 16384);
+    int opcao;
+    do {
+        printf("\n===== MENU DO SIMULADOR DE PAGINAÇÃO =====\n");
+        printf("1. Selecionar algoritmo (FIFO, RANDOM, LRU)\n");
+        printf("2. Adicionar processo\n");
+        printf("3. Simular acessos\n");
+        printf("4. Exibir memória física\n");
+        printf("5. Estatísticas\n");
+        printf("0. Sair\n");
+        printf("Escolha: ");
+        scanf("%d", &opcao);
 
-    int acessos[][2] = {
-        {0, 1000}, {0, 8000}, {0, 12000},
-        {1, 500}, {1, 10000}, {0, 2000},
-        {1, 12000}, {0, 4096}, {1, 4096},
-        {0, 8192}, {1, 8192}
-    };
+        if (opcao == 1) {
+            printf("Escolha algoritmo: 0=FIFO, 3=RANDOM, 1=LRU: ");
+            scanf("%d", &sim->algoritmo);
+        }
 
-    int n = sizeof(acessos)/sizeof(acessos[0]);
-    executar_simulacao(sim, acessos, n);
+        else if (opcao == 2) {
+            int pid, tam;
+            printf("PID do processo: ");
+            scanf("%d", &pid);
+            printf("Tamanho do processo (em bytes): ");
+            scanf("%d", &tam);
+            adicionar_processo(sim, pid, tam);
+        }
 
+        else if (opcao == 3) {
+            int qtd;
+            printf("Quantos acessos deseja simular? ");
+            scanf("%d", &qtd);
+
+            int acessos[qtd][2];
+            for (int i = 0; i < qtd; i++) {
+                printf("Acesso %d - PID e Endereço Virtual: ", i + 1);
+                scanf("%d %d", &acessos[i][0], &acessos[i][1]);
+            }
+
+            executar_simulacao(sim, acessos, qtd);
+        }
+
+        else if (opcao == 4) {
+            exibir_memoria_fisica(sim);
+        }
+
+        else if (opcao == 5) {
+            exibir_estatisticas(sim);
+        }
+
+    } while (opcao != 0);
+
+    printf("Simulador finalizado.\n");
     return 0;
 }
+
